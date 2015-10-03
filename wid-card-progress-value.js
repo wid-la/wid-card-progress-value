@@ -13,7 +13,8 @@
        * @type {String}
        */
       icon: {
-        type: String
+        type: String,
+        value: '../disk.svg'
       },
 
       /**
@@ -21,7 +22,8 @@
        * @type {String}
        */
       value: {
-        type: String
+        type: String,
+        value: '36'
       },
 
       /**
@@ -29,15 +31,13 @@
        * @type {String}
        */
       color: {
-        type: String
+        type: String,
+        value: '#FD8F26'
       }
 
     },
 
     ready: function ready() {
-      this.value = '36';
-      this.icon = '../disk.svg';
-      this.color = '#FD8F26';
       this.$.paperProgress.customStyle['--paper-progress-active-color'] = this.color;
     }
 
