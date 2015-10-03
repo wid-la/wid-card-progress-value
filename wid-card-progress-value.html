@@ -1,0 +1,133 @@
+<html><head><link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-progress/paper-progress.html">
+<link rel="import" href="../paper-styles/paper-styles-classes.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+
+<link rel="import" href="../wid-card-weight-behavior/wid-card-weight-behavior.html">
+<link rel="import" href="../wid-versatile-websocket/wid-versatile-websocket.html">
+<link rel="import" href="../wid-card-subscriptions-behavior/wid-card-subscriptions-behavior.html">
+
+
+<!--
+This element is a card for `wid-cards-grid`. It displays the status of a server process
+Example:
+    <wid-card-progress-value
+      subscriptions="[{"key": "datetime", "value": "la.wid.chan.cloud.prod.database.archer.datetime"}]"
+      importance="2">
+    </wid-card-progress-value>
+@group Wid
+@element wid-websocket
+@demo demo/index.html
+@hero hero.svg
+-->
+</head><body><dom-module id="wid-card-progress-value">
+
+  <template>
+
+    <style>
+
+      :host {
+        display: block;
+        box-sizing: border-box;
+        height: 100%;
+        margin: 5px;
+        position: relative;
+        text-align: center;
+      }
+
+      paper-material {
+        overflow-y: auto;
+        height: calc(100%/2);
+        /*background-color: var(--paper-blue-100);*/
+      }
+
+      iron-icon {
+        color: var(--paper-blue-600);
+      }
+
+      .scale-icon{
+        margin: auto;
+        --iron-icon-width:100%;
+        --iron-icon-height:100%;
+        position: absolute;
+      }
+
+      #header-container {
+        background-color: white;
+        color: white;
+        position: relative;
+        /*height: calc(100%/4);*/
+      }
+
+      #percentage-container{
+        background-color: #EAEAEA;
+        border-top-style: solid;
+        border-top-color: #BBBBBB;
+        border-top-width: 1px;
+        color: red;
+        position: relative;
+        /*height: calc(100%/4);*/
+      }
+
+      #content-container {
+        padding: 10px;
+      }
+
+      #websockets {
+        display: none;
+      }
+
+      #percentage-value{
+        position: absolute;
+        color: white;
+        font-size: 13vh;
+        top: 20%;
+        z-index: 30;
+        margin: auto;
+        font-family: roboto-light;
+        width: 100%;
+        height: 100%;
+
+      }
+
+      .custom-progess {
+         width: 100%;
+         --paper-progress-height:400px;
+         --paper-progress-transition-duration: 0.08s;
+         position: absolute;
+      }
+
+    </style>
+
+    <div id="websockets">
+
+      <!-- This is a requirement of `wid-card-subscriptions-behavior` -->
+      <!-- one websocket element for each subscribed channel -->
+      <template is="dom-repeat" items="[[websockets]]" as="ws">
+        <wid-versatile-websocket url="[[ws.url]]" token="[[ws.token]]" subscription="[[ws.subscription]]" on-data="_onData">
+        </wid-versatile-websocket>
+      </template>
+
+    </div>
+
+
+    <paper-material class="layout vertical" elevation="3">
+
+      <div id="header-container" class="layout horizontal flex">
+        <iron-icon id="" class="scale-icon" src="[[icon]]"></iron-icon>
+      </div>
+      <div id="percentage-container" class="layout horizontal flex center center">
+        <div id="percentage-value"><span>[[value]]</span>%</div>
+        <paper-progress id="paperProgress" class="custom-progess transiting" value="[[value]]"></paper-progress>
+      </div>
+
+    </paper-material>
+
+  </template>
+
+</dom-module>
+
+<script src="wid-card-progress-value.js"></script></body></html>
