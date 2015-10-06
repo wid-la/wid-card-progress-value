@@ -20,6 +20,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.1.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
+    "wid-card-standard-behavior": "wid-la/wid-card-standard-behavior#~1.0.0",
     "wid-card-weight-behavior": "wid-la/wid-card-weight-behavior#~1.0.0",
     "wid-versatile-websocket": "wid-la/wid-versatile-websocket#~1.0.0",
     "wid-card-subscriptions-behavior": "wid-la/wid-card-subscriptions-behavior#~1.0.0",

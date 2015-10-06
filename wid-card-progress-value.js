@@ -5,7 +5,7 @@
 
     is: 'wid-card-progress-value',
 
-    behaviors: [Polymer.WidCardWeightBehavior, Polymer.WidCardSubscriptionsBehavior],
+    behaviors: [Polymer.WidCardStandardBehavior, Polymer.WidCardWeightBehavior, Polymer.WidCardSubscriptionsBehavior],
 
     properties: {
       /**
@@ -14,7 +14,7 @@
        */
       icon: {
         type: String,
-        value: '../disk.svg'
+        value: 'cpu.svg'
       },
 
       /**
@@ -23,7 +23,7 @@
        */
       value: {
         type: String,
-        value: '36'
+        value: '0'
       },
 
       /**
@@ -32,13 +32,22 @@
        */
       color: {
         type: String,
-        value: '#FD8F26'
+        value: '#FD8F26',
+        observer: '_onColorChanged'
       }
 
     },
 
-    ready: function ready() {
-      this.$.paperProgress.customStyle['--paper-progress-active-color'] = this.color;
+    _getIconImage: function _getIconImage(img) {
+      return '/images/cards/' + img;
+    },
+
+    _percentValue: function _percentValue(value) {
+      return value + '%';
+    },
+
+    _onColorChanged: function _onColorChanged(value) {
+      this.$.paperProgress.customStyle['--paper-progress-active-color'] = value;
     }
 
   });
